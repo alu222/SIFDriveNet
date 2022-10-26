@@ -31,9 +31,7 @@ class  Mydata(Dataset):
                 self.img_list.append(list1[0])
                 self.speed_list.append(list1[1])
                 self.label_list.append(list1[2])
-        # print(self.img_list)#['0.jpg', '1.jpg']
-        # print(self.speed_list)#['0.txt', '1.txt']
-        # print(self.label_list)#['0', '1']
+       
         
         self._vid_transform, self._speed_transform = self._get_normalization_transform()
 
@@ -50,17 +48,16 @@ class  Mydata(Dataset):
     def __getitem__(self, idx): 
        
         image_path=os.path.join(self.img_path,self.img_list[idx])
-        # print("idx image_path",idx,image_path) trainimg/1.jpg
+     
         image = cv2.imread(image_path) #cv默认bgr hwc 我们正常读取图片是的通道顺序是h,w,c，但是通过pytorch中的ToTensor()处理之后，读出来的图片数据通道顺序就变成了c,h,w
-        #cv2.imshow('imag',image)
-        #image = cv2.cvtColor(image,cv2.COLOR_BGR2RGB) 
+    
         image = cv2.resize(image, (224,224))
         image = image/255.0
         image = image.transpose(2, 0, 1)
 
-        #print("image_shape",image.shape)
+       
         txt_path=os.path.join(self.speed_path,self.speed_list[idx])
-        #print("txt_path",txt_path)
+     
         samples = []
         with codecs.open("./"+txt_path, 'r', 'ascii') as infile:
             for i in infile.readlines():
@@ -70,7 +67,7 @@ class  Mydata(Dataset):
         samples=np.array(samples)
         
         frequencies, times, spectrogram =signal.spectrogram(samples, 1260, nperseg=512, noverlap=483)
-        #print("specshape",spectrogram.shape)
+     
         if spectrogram.shape != (257, 200):
             return torch.Tensor(np.random.rand(3, 224, 224)), torch.Tensor(np.random.rand(1, 257, 200)), torch.LongTensor([3])
         spectrogram = np.log(spectrogram + 1e-7)
@@ -85,25 +82,7 @@ class  Mydata(Dataset):
         #print("result",result)
         return image, speed, torch.LongTensor(result)
 
-# if __name__ == "__main__":
- 
-#     train_datasets = Mydata()
 
-#     train_loader = DataLoader(train_datasets, batch_size=2, shuffle=True, num_workers=0)
-
-#     for subepoch, (img, speed, label) in enumerate(train_loader):
-
-#         print('label.shape')
-#         #print(label.shape)
-#         print(label)
-#         print('img.shape')
-#         print(img.shape)
-#         print('speed.shape')
-#         print(speed.shape)
-#         label = label.squeeze(1)
-#         idx = (label != 3).numpy().astype(bool)
-#         print(idx.sum())
-#         break
 
 
 
