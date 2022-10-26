@@ -35,21 +35,20 @@ PyTorch implementation of the paper "SIFDriveNet: Speed and Image Fusion Driving
 #### 1.Environment configuration: Clone repo and install requirements.txt in a Python>=3.6.0 environment, including PyTorch>=1.7.
 
 ```
-git clone https://github.com//SIFDriveNet
-cd SIFDriveNet
+git clone https://github.com/alu222/SIF.git
 pip install -r requirements.txt  # install
 ```
 
 #### 2.train
 
 ```
-python mainNN1.py --mode train
+python mainNN_total.py --mode train
 ```
 
 #### 3.test
 
 ```
-python mainNN1.py --mode test
+python mainNN_total.py --mode test
 ```
 
 #### 4.result
