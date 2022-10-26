@@ -217,45 +217,38 @@ def main(use_cuda=True, EPOCHS=200, batch_size=8, model_name="avenet.pt"):
 			if (epoch == 0):
 				end = time.time()
 			for subepoch, (img, aud, out) in enumerate(dataloader):
-				# print(subepoch)
-				# print(img.shape)
-				# print(img.shape)
-				# print(aud.shape)
+				
 				if(epoch==0 and subepoch==0):
 					print(time.time() - end)
 				optim.zero_grad()				
-				# Filter the bad ones first
+				
 				out = out.squeeze(1)
 				idx = (out != 3).numpy().astype(bool)				
 				if idx.sum() == 0:
 					continue
-				# Find the new variables
+				
 				img = torch.Tensor(img.numpy()[idx, :, :, :])
 				aud = torch.Tensor(aud.numpy()[idx, :, :, :])
 				out = torch.LongTensor(out.numpy()[idx])
-				# Print shapes
+				
 				img = Variable(img)
 				aud = Variable(aud)
 				out = Variable(out)
-				# print(img.shape, aud.shape, out.shape)
+				
 				M = img.shape[0]
 				if use_cuda:
 					img = img.cuda()
 					aud = aud.cuda()
 					out = out.cuda()
-				# img=img.to(device)
-				# aud=aud.to(device)
+				
 				o, _, _ = model(img, aud)
-				# if subepoch%400 == 0:
-				# 	print(o)
-				# 	print(out)
-				# print(o.shape, out.shape)
+				
 				loss = crossEntropy(o, out)
-				# print(loss)
+				
 				train_losses.update(loss.item(),M)
 				loss.backward()
 				optim.step()
-				# Calculate accuracy
+				
 				o=F.softmax(o,1)
 				_, ind = o.max(1)
 				accuracy = (ind.data == out.data).sum()*1.0/M
@@ -364,16 +357,6 @@ def getAVENet(use_cuda):
 	f = torch.tensor([[0., 0., 0., 0.]], requires_grad=True).cuda()
 	print(R)
 	model = AVENet1(Bias,f,R,h)
-	# model.fc3.weight.data[0] = -0.1
-	# model.fc3.weight.data[1] =  0.1
-	# model.fc3.bias.data[0] =   1.0
-	# model.fc3.bias.data[1] = - 1.0
-	# model.fc3.weight.data[0] = -0.7090
-	# model.fc3.weight.data[1] =  0.7090
-	# model.fc3.weight.data[2] =  0.7090
-	# model.fc3.bias.data[0] =   1.2186
-	# model.fc3.bias.data[1] = - 1.2186
-	# model.fc3.bias.data[2] = - 1.2186
 	if use_cuda:
 		model = model.cuda()
 
@@ -424,14 +407,14 @@ def test(use_cuda=True, batch_size=8, model_name="/root/shiyan_total/model_total
 		idx = (out != 3).numpy().astype(bool)
 		if idx.sum() == 0:
 			continue
-		# Find the new variables
+		
 		img = torch.Tensor(img.numpy()[idx, :, :, :])
 		aud = torch.Tensor(aud.numpy()[idx, :, :, :])
 		out = torch.LongTensor(out.numpy()[idx])
 		img = Variable(img, volatile=True)
 		aud = Variable(aud, volatile=True)
 		out = Variable(out, volatile=True)
-		# print(img.shape, aud.shape, out.shape)
+		
 		M = img.shape[0]
 		if use_cuda:
 			img = img.cuda()
@@ -441,7 +424,7 @@ def test(use_cuda=True, batch_size=8, model_name="/root/shiyan_total/model_total
 			o, _, _ = model(img, aud)
 			valloss = crossEntropy(o, out)
 		test_losses.update(valloss.item(), M)
-		# Calculate valaccuracy
+		
 		o = F.softmax(o, 1)
 		_, ind = o.max(1)
 		testconfusion.update(ind.to("cpu").numpy(), out.to("cpu").numpy())
@@ -467,7 +450,7 @@ if __name__ == "__main__":
 	cuda = True
 	args = parser.parse_args()
 	mode = args.mode
-	# list_image1=getimage()
+	
 	if mode == "demo":
 		demo()
 	elif mode == "main":
