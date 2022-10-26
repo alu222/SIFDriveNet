@@ -1,4 +1,4 @@
-# SIF
+
 # **SIFDriveNet: Speed and Image Fusion Driving Behavior Classification Network**
 
 ------
@@ -35,7 +35,7 @@ PyTorch implementation of the paper "SIFDriveNet: Speed and Image Fusion Driving
 #### 1.Environment configuration: Clone repo and install requirements.txt in a Python>=3.6.0 environment, including PyTorch>=1.7.
 
 ```
-git clone https://github.com/alu222/SIF.git
+git clone https://github.com/alu222/SIFDriveNet.git
 pip install -r requirements.txt  # install
 ```
 
