@@ -3,7 +3,7 @@
 
 ------
 
-![](D:\研究生\调研\驾驶风格论文图片\network1.PNG)
+![](network1.PNG)
 
 PyTorch implementation of the paper "SIFDriveNet: Speed and Image Fusion Driving Behavior Classification Network"
 
@@ -55,16 +55,16 @@ python mainNN1.py --mode test
 
 Performance comparison with other driving behavior classification methods on experimental data of all roads. The Acc, Pre and Rec represent the accuracy, precision and recall. The "-" means that it is not indicated in the method.
 
-![](D:\研究生\调研\驾驶风格论文图片\resultall.PNG)
+![](resultall.PNG)
 
 
 
 Performance comparison with other driving behavior classification methods on experimental data of motorway road.
 
-![](D:\研究生\调研\驾驶风格论文图片\resultmotor.PNG)
+![](resultmotor.PNG)
 
 
 
 Performance comparison with other driving behavior classification methods on experimental data of secondary road.
 
-![](D:\研究生\调研\驾驶风格论文图片\resultsecond.PNG)
+![](resultsecond.PNG)
