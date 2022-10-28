@@ -1,7 +1,7 @@
 
 # **SIFDriveNet: Speed and Image Fusion Driving Behavior Classification Network**
 
-------
+
 
 ![](network2.PNG)
 
@@ -11,7 +11,7 @@ PyTorch implementation of the paper "SIFDriveNet: Speed and Image Fusion Driving
 
 ## **Changelog**
 
-------
+
 
 - [2022-10-26] Release the initial code for SIFDriveNet.
 
@@ -19,7 +19,7 @@ PyTorch implementation of the paper "SIFDriveNet: Speed and Image Fusion Driving
 
 ## **一、Dataset processing**
 
-------
+
 
 #### **UAH-DriveSet dataset**
 
@@ -70,6 +70,6 @@ Performance comparison with other driving behavior classification methods on exp
 ![](resultsecond.PNG)
 
 ## **Contribute**
-------
+
 
 Thanks to [Yan Gong](https://github.com/gongyan1) and [Wenzhuo Liu](https://github.com/liuwenzhuo1) for their contributions to this code base.
